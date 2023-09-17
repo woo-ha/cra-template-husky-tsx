@@ -19,8 +19,5 @@
     "url": "https://github.com/woo-ha/cra-template-basic-tsx.git",
     "directory": "/"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "license": "MIT"
 }
