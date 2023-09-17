@@ -12,7 +12,10 @@
     "scripts": {
       "start": "react-scripts start",
       "build": "react-scripts build",
-      "eject": "react-scripts eject"
+      "eject": "react-scripts eject",
+      "postinstall": "husky install",
+      "format": "prettier --ignore-path .gitignore --write 'src/**/*.{ts,tsx,scss,css,json}' --cached",
+      "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color --cached"
     },
     "eslintConfig": {
       "extends": ["react-app"]
@@ -24,6 +27,17 @@
         "last 1 firefox version",
         "last 1 safari version"
       ]
+    },
+    "devDependencies": {
+      "@typescript-eslint/parser": "^5.62.0",
+      "eslint": "^8.48.0",
+      "eslint-config-prettier": "^9.0.0",
+      "husky": "^8.0.3",
+      "lint-staged": "^14.0.1",
+      "prettier": "^3.0.3"
+    },
+    "lint-staged": {
+      "src/**/*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"]
     }
   }
 }
