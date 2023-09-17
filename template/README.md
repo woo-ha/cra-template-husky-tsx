@@ -1,8 +1,10 @@
 # 🥕 Create React App Husky TSX Template
 
 Create React App template with husky and lint-staged to automate prettier and eslint configured.
-This template allows user to
-This template is focused on simplicity by removing non-critical files including test files from `npx create-react-app --template typescript`.
+
+This template automates the code formatting and linting process before committing staged files using Husky and lint-staged. It excludes other non-critical files from this process, which can be derived from the template `basic-tsx`.
+
+If you prefer a basic layout without the automation of the code formatting and linting process, please check out the <a href="https://www.npmjs.com/package/cra-template-basic-tsx">basic-tsx</a> template that we've created.
 
 ## Getting Started
 
@@ -53,6 +55,11 @@ The pre-set ESLint format is as follows. You can change Eslint format as you wan
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
@@ -65,8 +72,6 @@ The pre-set ESLint format is as follows. You can change Eslint format as you wan
   }
 }
 ```
-
-###
 
 ## Available Default Scripts
 
@@ -100,25 +105,31 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### `npm run postinstall`
+### `npm run prepare`
 
-Run `husky install` to install husky in the current project and set up Git hook.
+**Note: If you have a warning such as "husky pre-commit is not set to be executable", you should run `npm run prepare`**
+
+Run `husky install | chmod ug+x .husky/*` to install husky in the current project and set up Git hook.
 
 Husky creates a Git hook setup file in the project's .git directory and activates it. This will allow you to automate code checking, formatting, and test runs later using Git hooks such as pre-commit, pre-push, etc.
 
-The husky install command is a step in initializing and setting Husky to a project, where you can then add or modify a hook-related script within the .husky directory to configure the desired behavior.
+This command sequence is often used to ensure that the Husky hooks are not only installed but also set to be executable, which is necessary for them to run when triggered by specific Git actions.
 
 ### `npm run format`
 
-Run `prettier --ignore-path .gitignore --write 'src/**/*.{ts,tsx,scss,css,json} --cached` to format the code all files that have changed.
+Run `prettier --ignore-path .gitignore --write --cache .` to format the code all files that have changed.
 
-This command performs prefix formatting for files with extensions .ts, .tsx, .scss, .css, .json within the src directory. However, the path and file specified in the .gitignore file are excluded from formatting. This helps to respect Gitignore rules while applying code formatting. It also skips files that have not changed quickly without having to re-examine them.
+The given command employs the Prettier code formatting tool to format code files found in the current directory and its subdirectories. It utilizes the rules specified in the ".gitignore" file to determine which files to exclude from formatting.
+
+Additionally, it uses the "--cache" option to improve performance by avoiding reformatting of unchanged files, and the "--write" option to directly apply formatting changes to the code files.
 
 ### `npm run lint`
 
-Run `eslint --ext .js,.jsx,.ts,.tsx src --color --cached` to apply ESLint rules for JavaScript and TypeScript files.
+Run `eslint --ext .js,.jsx,.ts,.tsx src --color --cache --max-warnings=0` to apply ESLint rules for JavaScript and TypeScript files.
 
-This command applies ESLint rules for JavaScript and TypeScript files within the src directory and checks for code style and potential errors. Only files with extensions .js, .jsx, .ts, .tsx are scanned, so other files within the project are ignored. Also, use the --color option to display the results more readable. It also skips files that have not changed quickly without having to re-examine them.
+The command runs ESLint, a code analysis tool, on JavaScript and TypeScript files within the "src" directory and its subdirectories. It enforces a rule of zero warnings, treating any warnings as errors and preventing code with warnings from passing the linting process.
+
+Additionally, it utilizes ESLint's caching feature and displays colorized output for improved performance and readability during the linting process.
 
 ## Learn More
 
