@@ -53,7 +53,7 @@ The pre-set ESLint format is as follows. You can change Eslint format as you wan
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "parser": "@typescript-eslint/parse",
+  "parser": "@typescript-eslint/parser",
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "no-var": "error",
